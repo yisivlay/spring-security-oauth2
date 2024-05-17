@@ -27,6 +27,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -84,6 +85,20 @@ public class User implements UserDetails, Principal {
 
     @Column(name = "is_enabled", nullable = false)
     private boolean isEnabled;
+
+    @Column(name = "createdby_id")
+    private Long createdBy;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "lastmodifiedby_id")
+    private Long lastModifiedBy;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "lastmodified_date")
+    private LocalDateTime lastModifiedDate;
 
     @Override
     public String getName() {

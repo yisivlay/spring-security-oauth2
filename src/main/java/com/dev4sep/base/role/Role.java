@@ -18,6 +18,9 @@ package com.dev4sep.base.role;
 import com.dev4sep.base.user.User;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,6 +33,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "tbl_role")
 public class Role {
@@ -44,12 +48,14 @@ public class Role {
     @Column(name = "name", length = 150, unique = true, nullable = false)
     private String name;
 
+    @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime createdDate;
 
+    @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_modified_date")
+    @Column(name = "last_modified_date", insertable = false)
     private LocalDateTime lastModifiedDate;
 
 }
